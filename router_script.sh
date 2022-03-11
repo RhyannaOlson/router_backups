@@ -28,8 +28,9 @@ except (AuthenticationException):
   print("An authentication error occured while trying to connect to " + routerIP)
 except (SSHException):
   print("The device " + routerIP + " timed out while trying to connect.")
-except (NetmikoTimeoutException, SSHException) as error:
-  pass
+except (NetmikoTimeoutException):
   print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
+except (SSHException):
+  print("Error reading protocol banner")
 
 print("The script ran successfully")
