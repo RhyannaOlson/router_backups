@@ -6,7 +6,7 @@ import os
 import netmiko
 from netmiko import ConnectHandler
 from getpass import getpass
-from netmiko.ssh_exception import AuthenticationException, SSHException, NetmikoTimeoutException
+from netmiko.ssh_exception import AuthenticationException, SSHException, NetmikoTimeoutException, SSHException
 
 user = input('please type your username: ')
 
@@ -28,8 +28,7 @@ except (AuthenticationException):
   print("An authentication error occured while trying to connect to " + routerIP)
 except (SSHException):
   print("The device " + routerIP + " timed out while trying to connect.")
-except (NetmikoTimeoutException):
-  pass
+except (NetmikoTimeoutException, SSHException) as error:
   print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
 
 print("The script ran successfully")
