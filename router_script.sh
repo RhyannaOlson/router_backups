@@ -10,6 +10,7 @@ from getpass import getpass
 from netmiko.ssh_exception import AuthenticationException
 from paramiko.ssh_exception import SSHException
 from netmiko.ssh_exception import NetMikoTimeoutException
+from paramiko import EOFError
 
 user = input('please type your username: ')
 
@@ -24,19 +25,19 @@ routerIP = str('192.168.108.220')
 dict = {'ip': routerIP, 'username': user, 'password': secret, 'device_type': 'cisco_ios'}
 
 try:
-  connection = ConnectHandler(**dict)
-  output = connection.send_command('show run')
-  backupFile.write(output)
-  backupFile.close()
+    connection = ConnectHandler(**dict)
 except (NetMikoTimeoutException):
-  print("The device " + routerIP + " timed out while trying to connect.")
+    print("The device " + routerIP + " timed out while trying to connect.")
 except (AuthenticationException):
-  print("An authentication error occured while trying to connect to " + routerIP)
+    print("An authentication error occured while trying to connect to " + routerIP)
 except (SSHException):
-  print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
+    print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
 except (EOFError):
-  print("End os file error occured while attempting to connect to " + routerIP)
+    print("End os file error occured while attempting to connect to " + routerIP)
 except Exception as other_error:
-  print(" the error " + str(other_error) + " occured while connecting to " + routerIP)
+    print(" the error " + str(other_error) + " occured while connecting to " + routerIP)
 finally:
-  print("The script ran successfully")
+    output = connection.send_command('show run')
+    backupFile.write(output)
+    backupFile.close()
+    print("The script ran successfully")
