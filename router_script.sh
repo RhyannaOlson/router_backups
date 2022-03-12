@@ -35,9 +35,8 @@ except (EOFError):
   print("End os file error occured while attempting to connect to " + routerIP)
 except Exception as other_error:
   print(" the error " + str(other_error) + " occured while connecting to " + routerIP)
-
-
-output = connection.send_command('show run')
-backupFile.write(output)
-backupFile.close()
-print("The script ran successfully")
+finally:
+  output = connection.send_command('show run')
+  backupFile.write(output)
+  backupFile.close()
+  print("The script ran successfully")
