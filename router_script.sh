@@ -30,5 +30,7 @@ except (SSHException):
   print("The device " + routerIP + " timed out while trying to connect.")
 except (NetmikoTimeoutException):
   print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
-
+except (EOFerror):
+  print("An EOFerror occured")
+  
 print("The script ran successfully")
