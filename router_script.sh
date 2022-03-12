@@ -26,6 +26,7 @@ dict = {'ip': routerIP, 'username': user, 'password': secret, 'device_type': 'ci
 try:
     connection = ConnectHandler(**dict)
     output = connection.send_command('show run')
+    print(output)
     backupFile.write(output)
 except (NetMikoTimeoutException):
     print("The device " + routerIP + " timed out while trying to connect.")
@@ -39,5 +40,4 @@ except Exception as other_error:
     print(" the error " + str(other_error) + " occured while connecting to " + routerIP)
 
 
-print(output)
 print("The script ran successfully")
