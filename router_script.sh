@@ -4,9 +4,11 @@ from pathlib import Path
 from datetime import datetime
 import os
 import netmiko
+import paramiko
 from netmiko import ConnectHandler
 from getpass import getpass
 from netmiko.ssh_exception import AuthenticationException, SSHException, NetmikoTimeoutException
+from paramiko.ssh_exception import SSHException
 
 user = input('please type your username: ')
 
@@ -24,13 +26,11 @@ try:
   output = connection.send_command('show run')
   backupFile.write(output)
   backupFile.close()
-except (AuthenticationException):
+except (AuthenticationException:
   print("An authentication error occured while trying to connect to " + routerIP)
 except (SSHException):
   print("The device " + routerIP + " timed out while trying to connect.")
-except (NetmikoTimeoutException):
+except (NetmikoTimeoutException, paramiko.ssh_exception.SSHException) as error:
   print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
-except (EOFerror):
-  print("An EOFerror occured")
-  
+
 print("The script ran successfully")
