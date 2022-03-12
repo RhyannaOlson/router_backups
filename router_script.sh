@@ -9,7 +9,7 @@ from netmiko import ConnectHandler
 from getpass import getpass
 from netmiko.ssh_exception import AuthenticationException
 from paramiko.ssh_exception import SSHException
-from ntmiko.ssh_exception import NetMikoTimeoutException
+from netmiko.ssh_exception import NetMikoTimeoutException
 
 user = input('please type your username: ')
 
