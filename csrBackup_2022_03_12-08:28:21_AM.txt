@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 6210 bytes
+Current configuration : 3886 bytes
 !
-! Last configuration change at 00:49:58 UTC Sat Mar 12 2022
+! Last configuration change at 16:27:39 UTC Sat Mar 12 2022
 !
 version 16.11
 service timestamps debug datetime msec
@@ -36,6 +36,7 @@ call-home
 !
 !
 !
+no ip domain lookup
 ip domain name lab9.local
 !
 !
@@ -69,46 +70,11 @@ multilink bundle-name authenticated
 !
 !
 !
-crypto pki trustpoint TP-self-signed-155075347
- enrollment selfsigned
- subject-name cn=IOS-Self-Signed-Certificate-155075347
- revocation-check none
- rsakeypair TP-self-signed-155075347
-!
 crypto pki trustpoint SLA-TrustPoint
  enrollment pkcs12
  revocation-check crl
 !
 !
-crypto pki certificate chain TP-self-signed-155075347
- certificate self-signed 01
-  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
-  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
-  69666963 6174652D 31353530 37353334 37301E17 0D323230 33313132 30303032 
-  355A170D 33303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
-  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3135 35303735 
-  33343730 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
-  82010100 C426ED32 607A44ED 5E2CE991 636C6E4E 49B34537 887F96CD C97E0896 
-  E454D0E3 CFB99CF0 6F6B71CA 8A265F8D D67A589F A4B106ED C310F094 817FF67F 
-  A0F9A940 A242CA79 50D55D96 F4299F7E C0DDA38D E670352E 36D411FB 4148AF7C 
-  8E99A40C 101B721C B5DE15B5 3B6D8EC5 B60128DB 647F78D6 34AFF471 8CA64311 
-  95B45A5C 6BC0366C 1FD2708F 82ED4602 45E2040D E89182B0 F0733D4F 8812B98B 
-  36125C74 C65E1127 4A87E08E 51F8E03E 778C27FC 0949763B 0792C016 8DA8C2C0 
-  5265489C AE7B0E0C DF7FB612 48E98CF8 0426FF8B F32FE687 FD6A6848 55FA3241 
-  CCA551AE 7AE5702C 2963AEE8 D97E9806 B3B8C14D 3BDC02A1 26031429 0DD12143 
-  AAA56F8D 02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 
-  0603551D 23041830 16801458 02B367DC 26529F3F 63B8C211 0B4FEB8C 5FB32830 
-  1D060355 1D0E0416 04145802 B367DC26 529F3F63 B8C2110B 4FEB8C5F B328300D 
-  06092A86 4886F70D 01010505 00038201 01000778 A462802C F4F7541F F529B6A1 
-  2899D81E 0C6DD45C 79BC95BA 0DBD79C1 357EEBCC 9FA9536C DFAE330A 1C6C3B13 
-  3004EA1C B5BA7FDB 1FE7AB85 8E97E7C7 2ACFB957 96A603AC 237F86CB CBBA76E9 
-  F70C4D21 9BE700D7 C0387016 0C22F6F2 48BCF691 9C6E5D24 5B0CD7B1 FADEFA05 
-  086F1853 599B0F4E EC0EB51C 9A8A520C 3C61D69A FAAE0F77 8EF4ECC8 07AE9260 
-  3D82920C 26DCD0A1 67828C0E 834FE9F3 D03E4A21 171E5B6E 0AE6F240 97A1C98E 
-  0756E47F 2F3458B0 AA919F3B 411ACC2C 1BCA7BFB 73B4CB9D D70E2226 5FBCEDD4 
-  6C4ADA95 3DA695EA 8F5D2FC9 55DFF9A4 671E34BA 5D6DC418 52866701 FEF45577 
-  0E2CE110 9897A2F4 7AAAE648 2600A7A6 0B7F
-  	quit
 crypto pki certificate chain SLA-TrustPoint
  certificate ca 01
   30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
@@ -139,8 +105,7 @@ crypto pki certificate chain SLA-TrustPoint
   D697DF7F 28
   	quit
 !
-license udi pid CSR1000V sn 94HX4AZZNA6
-license boot level ax
+license udi pid CSR1000V sn 9Q291V42OVL
 diagnostic bootup level minimal
 !
 spanning-tree extend system-id
@@ -148,7 +113,7 @@ memory free low-watermark processor 80526
 !
 !
 !
-username olson privilege 15 secret 9 $9$ZoNIAZfN/XUA9E$qAZKqoguf9lRGzeMK/uQb3YjFqJjJucB/1LdilPQdBk
+username olson privilege 15 secret 9 $9$huNk5ZRVydfU6E$pUbPsDZAL.RLo0eCoi9n8swEfcc93eAXkU/Mnc1Ziyc
 !
 redundancy
 !
@@ -182,23 +147,19 @@ interface GigabitEthernet1
  no mop sysid
 !
 interface GigabitEthernet2
- no ip address
- shutdown
  negotiation auto
  no mop enabled
  no mop sysid
 !
 interface GigabitEthernet3
- no ip address
- shutdown
  negotiation auto
  no mop enabled
  no mop sysid
 !
 ip forward-protocol nd
-ip http server
-ip http authentication local
+no ip http server
 ip http secure-server
+ip http client source-interface GigabitEthernet1
 !
 !
 !
@@ -216,14 +177,7 @@ control-plane
 !
 line con 0
  stopbits 1
-line vty 0
- login local
- transport input ssh
-line vty 1
- login local
- length 0
- transport input ssh
-line vty 2 5
+line vty 0 5
  login local
  transport input ssh
 !
