@@ -35,7 +35,7 @@ except (SSHException):
     print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
 except (EOFError):
     print("End os file error occured while attempting to connect to " + routerIP)
-except Exception as other_error:
+except Exception (client) as other_error:
     print(" the error " + str(other_error) + " occured while connecting to " + routerIP)
 finally:
     print("The script ran successfully")
