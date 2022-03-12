@@ -10,7 +10,6 @@ from getpass import getpass
 from netmiko.ssh_exception import AuthenticationException
 from paramiko.ssh_exception import SSHException
 from netmiko.ssh_exception import NetMikoTimeoutException
-from paramiko import EOFError
 
 user = input('please type your username: ')
 
