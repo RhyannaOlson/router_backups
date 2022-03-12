@@ -26,7 +26,7 @@ try:
   output = connection.send_command('show run')
   backupFile.write(output)
   backupFile.close()
-except (AuthenticationException:
+except (AuthenticationException):
   print("An authentication error occured while trying to connect to " + routerIP)
 except (SSHException):
   print("The device " + routerIP + " timed out while trying to connect.")
