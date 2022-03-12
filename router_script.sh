@@ -25,8 +25,6 @@ dict = {'ip': routerIP, 'username': user, 'password': secret, 'device_type': 'ci
 
 try:
     connection = ConnectHandler(**dict)
-    output = connection.send_command('show run')
-    backupFile.write(output)
 except (NetMikoTimeoutException):
     print("The device " + routerIP + " timed out while trying to connect.")
 except (AuthenticationException):
@@ -35,7 +33,10 @@ except (SSHException):
     print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
 except (EOFError):
     print("End os file error occured while attempting to connect to " + routerIP)
-except Exception (client) as other_error:
+except Exception as other_error:
     print(" the error " + str(other_error) + " occured while connecting to " + routerIP)
-finally:
-    print("The script ran successfully")
+
+
+output = connection.send_command('show run')
+backupFile.write(output)
+print("The script ran successfully")
