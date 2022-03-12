@@ -28,8 +28,8 @@ try:
 except (AuthenticationException):
   print("An authentication error occured while trying to connect to " + routerIP)
 except (SSHException):
-  print("The device " + routerIP + " timed out while trying to connect.")
-except (NetMikoTimeoutException):
   print("An error occured while connecting to " + routerIP + " via SSH. Is SSH enabled?")
+except (NetMikoTimeoutException):
+  print("The device " + routerIP + " timed out while trying to connect.")
 
 print("The script ran successfully")
